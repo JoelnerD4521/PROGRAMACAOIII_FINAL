@@ -15,9 +15,9 @@ public class Apartamento extends Fracao {
     private int numeroVarandas;
     private boolean temTerraco;
 
-    public Apartamento(String identificador, double area, double percentagem, String localizacao,
-                       String tipo, int numeroCasasBanho, int numeroVarandas, boolean temTerraco) {
-        super(identificador, area, percentagem, localizacao);
+     public Apartamento(String identificador, double area, double percentagem, String localizacao,
+                       String tipo, int numeroCasasBanho, int numeroVarandas, boolean temTerraco, Proprietario proprietario) {
+        super(identificador, area, percentagem, localizacao, proprietario);
         this.tipo = tipo;
         this.numeroCasasBanho = numeroCasasBanho;
         this.numeroVarandas = numeroVarandas;
@@ -60,5 +60,4 @@ public class Apartamento extends Fracao {
     public double calcularQuotaMensal(double despesaGeral, double despesaElevadores) {
         return (getPercentagem() / 100) * (despesaGeral + despesaElevadores);
     }
-    
 }

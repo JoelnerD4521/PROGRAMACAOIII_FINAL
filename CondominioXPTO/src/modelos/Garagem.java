@@ -13,9 +13,9 @@ public class Garagem extends Fracao {
     private int capacidadeViaturas;
     private boolean temLavagem;
 
-    public Garagem(String identificador, double area, double percentagem, String localizacao,
-                   int capacidadeViaturas, boolean temLavagem) {
-        super(identificador, area, percentagem, localizacao);
+   public Garagem(String identificador, double area, double percentagem, String localizacao,
+                   int capacidadeViaturas, boolean temLavagem, Proprietario proprietario) {
+        super(identificador, area, percentagem, localizacao, proprietario);
         this.capacidadeViaturas = capacidadeViaturas;
         this.temLavagem = temLavagem;
     }

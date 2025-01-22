@@ -10,10 +10,9 @@ package modelos;
  */
 public class Loja extends Fracao {
   
-      public Loja(String identificador, double area, double percentagem, String localizacao) {
-        super(identificador, area, percentagem, localizacao);
+      public Loja(String identificador, double area, double percentagem, String localizacao, Proprietario proprietario) {
+        super(identificador, area, percentagem, localizacao, proprietario);
     }
-
     @Override
     public double calcularQuotaMensal(double despesaGeral, double despesaElevadores) {
         return (getPercentagem() / 100) * despesaGeral; // Não participa nas despesas de elevadores

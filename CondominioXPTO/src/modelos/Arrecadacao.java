@@ -12,8 +12,8 @@ public class Arrecadacao extends Fracao {
     
      private boolean temPortaBlindada;
 
-    public Arrecadacao(String identificador, double area, double percentagem, String localizacao, boolean temPortaBlindada) {
-        super(identificador, area, percentagem, localizacao);
+    public Arrecadacao(String identificador, double area, double percentagem, String localizacao, boolean temPortaBlindada, Proprietario proprietario) {
+        super(identificador, area, percentagem, localizacao, proprietario);
         this.temPortaBlindada = temPortaBlindada;
     }
 

@@ -16,12 +16,14 @@ public abstract class Fracao implements Serializable {
     private double area;
     private double percentagem;
     private String localizacao;
+ private Proprietario proprietario; // Associação com a classe Proprietario
 
-    public Fracao(String identificador, double area, double percentagem, String localizacao) {
+    public Fracao(String identificador, double area, double percentagem, String localizacao, Proprietario proprietario) {
         this.identificador = identificador;
         this.area = area;
         this.percentagem = percentagem;
         this.localizacao = localizacao;
+        this.proprietario = proprietario;
     }
 
     public String getIdentificador() {
@@ -56,8 +58,15 @@ public abstract class Fracao implements Serializable {
         this.localizacao = localizacao;
     }
 
+    public Proprietario getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+        this.proprietario = proprietario;
+    }
+
     public abstract double calcularQuotaMensal(double despesaGeral, double despesaElevadores);
-    
 }
     
 
