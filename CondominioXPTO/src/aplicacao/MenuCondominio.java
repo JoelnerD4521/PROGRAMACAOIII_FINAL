@@ -33,11 +33,11 @@ public class MenuCondominio {
         List<Fracao> fracoes = Ficheiros.carregarDados(CAMINHO_FICHEIRO);
         if (fracoes == null) {
             condominio = new Condominio("XPTO", "Rua Principal, Luanda", 0, 0);
-            System.out.println("Condomínio criado com sucesso!");
+            System.out.println("Condominio criado com sucesso!");
         } else {
             condominio = new Condominio("XPTO", "Rua Principal, Luanda", 0, 0);
             fracoes.forEach(condominio::adicionarFracao);
-            System.out.println("Dados do condomínio carregados com sucesso!");
+            System.out.println("Dados do condominio carregados com sucesso!");
         }
     }
 
@@ -46,16 +46,21 @@ public class MenuCondominio {
         Scanner scanner = new Scanner(System.in);
         int opcao;
         do {
-            System.out.println("\n========== Gestão do Condomínio XPTO ==========");
-            System.out.println("1. Adicionar Proprietário");
-            System.out.println("2. Adicionar Fração");
-            System.out.println("3. Listar Frações");
+            try{
+            System.out.println("\n========== Gestao do Condominio XPTO ==========");
+            System.out.println("1. Adicionar Proprietario");
+            System.out.println("2. Adicionar Fracao");
+            System.out.println("3. Listar Fracoes");
             System.out.println("4. Calcular Quotas Mensais");
             System.out.println("5. Verificar Percentagens");
-            System.out.println("6. Atualizar Despesas do Condomínio");
+            System.out.println("6. Atualizar Despesas do Condominio");
             System.out.println("7. Salvar e Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             opcao = scanner.nextInt();
+            } catch(java.util.InputMismatchException e)
+            {System.out.println("Entrada invalida use apenas numeros para selecionar as opções");
+             opcao = scanner.nextInt();
+             }
 
             switch (opcao) {
                 case 1 -> adicionarProprietario(scanner);
@@ -65,14 +70,14 @@ public class MenuCondominio {
                 case 5 -> verificarPercentagens();
                 case 6 -> atualizarDespesas(scanner);
                 case 7 -> System.out.println("Saindo... Dados salvos!");
-                default -> System.out.println("Opção inválida! Tente novamente.");
+                default -> System.out.println("Opcao invalida! Tente novamente.");
             }
         } while (opcao != 7);
     }
 
     // Adiciona um novo proprietário
     private static void adicionarProprietario(Scanner scanner) {
-        System.out.println("\n--- Adicionar Proprietário ---");
+        System.out.println("\n--- Adicionar Proprietario ---");
         System.out.print("Identificador: ");
         String identificador = scanner.next();
 
@@ -80,10 +85,13 @@ public class MenuCondominio {
         String nome = scanner.next();
 
         System.out.print("Morada: ");
-        String morada = scanner.next();
+        String morada = scanner.nextLine();
 
         System.out.print("Telefone: ");
         String telefone = scanner.next();
+        
+        System.out.print("Telemovel: ");
+        String telemovel = scanner.nextLine();
 
         System.out.print("Email: ");
         String email = scanner.next();
@@ -91,35 +99,35 @@ public class MenuCondominio {
         System.out.print("Data de Nascimento (dd/mm/yyyy): ");
         String dataNascimento = scanner.next();
 
-        Proprietario proprietario = new Proprietario(identificador, nome, morada, telefone, email, dataNascimento);
+        Proprietario proprietario = new Proprietario(identificador, nome, morada, telefone,telemovel, email, dataNascimento);
         proprietarios.add(proprietario);
-        System.out.println("Proprietário adicionado com sucesso!");
+        System.out.println("Proprietario adicionado com sucesso!");
     }
 
     // Adiciona uma nova fração ao condomínio
     private static void adicionarFracao(Scanner scanner) {
-        System.out.println("\n--- Adicionar Fração ---");
-        System.out.print("Tipo (1-Apartamento, 2-Loja, 3-Garagem, 4-Arrecadação): ");
+        System.out.println("\n--- Adicionar Fracao ---");
+        System.out.print("Tipo (1-Apartamento, 2-Loja, 3-Garagem, 4-Arrecadacao): ");
         int tipo = scanner.nextInt();
         scanner.nextLine(); // Consumir a nova linha
 
         System.out.print("Identificador: ");
         String identificador = scanner.nextLine();
 
-        System.out.print("Área: ");
+        System.out.print("Area: ");
         double area = scanner.nextDouble();
 
         System.out.print("Percentagem: ");
         double percentagem = scanner.nextDouble();
         scanner.nextLine(); // Consumir a nova linha
 
-        System.out.print("Localização: ");
+        System.out.print("Localizacao: ");
         String localizacao = scanner.nextLine();
 
         Proprietario proprietario = selecionarProprietario(scanner);
 
         if (!Validacao.validarTexto(identificador) || !Validacao.validarPercentagem(percentagem)) {
-            System.out.println("Dados inválidos! Fração não adicionada.");
+            System.out.println("Dados invalidos! Fracao nao adicionada.");
             return;
         }
 
@@ -127,9 +135,9 @@ public class MenuCondominio {
             case 1 -> {
                 System.out.print("Tipo de Apartamento (T0-T5): ");
                 String tipoApartamento = scanner.nextLine();
-                System.out.print("Número de Casas de Banho: ");
+                System.out.print("Numero de Casas de Banho: ");
                 int casasBanho = scanner.nextInt();
-                System.out.print("Número de Varandas: ");
+                System.out.print("Numero de Varandas: ");
                 int varandas = scanner.nextInt();
                 System.out.print("Tem terraço? (true/false): ");
                 boolean terraço = scanner.nextBoolean();
@@ -154,33 +162,33 @@ public class MenuCondominio {
         if (novaFracao != null) {
             condominio.adicionarFracao(novaFracao);
             condominio.recalcularPercentagens();
-            System.out.println("Fração adicionada com sucesso!");
+            System.out.println("Fracao adicionada com sucesso!");
         } else {
-            System.out.println("Tipo inválido!");
+            System.out.println("Tipo invalido!");
         }
     }
 
     // Lista todos os proprietários e permite selecionar um
     private static Proprietario selecionarProprietario(Scanner scanner) {
-        System.out.println("\n--- Selecionar Proprietário ---");
+        System.out.println("\n--- Selecionar Proprietario ---");
         for (int i = 0; i < proprietarios.size(); i++) {
             System.out.println((i + 1) + ". " + proprietarios.get(i).getNome());
         }
-        System.out.print("Escolha o número do proprietário: ");
+        System.out.print("Escolha o numero do proprietario: ");
         int escolha = scanner.nextInt();
         return proprietarios.get(escolha - 1);
     }
 
     // Lista todas as frações do condomínio
     private static void listarFracoes() {
-        System.out.println("\n--- Listar Frações ---");
+        System.out.println("\n--- Listar Fracoes ---");
         List<Fracao> fracoes = condominio.listarFracoes();
         if (fracoes.isEmpty()) {
-            System.out.println("Nenhuma fração registrada.");
+            System.out.println("Nenhuma fracao registrada.");
         } else {
             fracoes.forEach(fracao -> {
                 System.out.println(fracao);
-                System.out.println("Proprietário: " + fracao.getProprietario());
+                System.out.println("Proprietario: " + fracao.getProprietario());
             });
         }
     }
@@ -196,7 +204,7 @@ public class MenuCondominio {
     private static void verificarPercentagens() {
         boolean validas = condominio.verificarPercentagens();
         System.out.println("\n--- Verificar Percentagens ---");
-        System.out.println("As percentagens estão corretas? " + (validas ? "Sim" : "Não"));
+        System.out.println("As percentagens estao corretas? " + (validas ? "Sim" : "Nao"));
     }
 
     // Atualiza as despesas gerais e dos elevadores

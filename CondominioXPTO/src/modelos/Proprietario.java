@@ -17,20 +17,30 @@ public class Proprietario implements Serializable {
     private String nome;
     private String morada;
     private String telefone;
+    private String telemovel;
     private String email;
     private String dataNascimento;
 
-    public Proprietario(String identificador, String nome, String morada, String telefone, String email, String dataNascimento) {
+    public Proprietario(String identificador, String nome, String morada, String telefone,String telemovel, String email, String dataNascimento) {
         this.identificador = identificador;
         this.nome = nome;
         this.morada = morada;
         this.telefone = telefone;
+        this.telemovel = telemovel;
         this.email = email;
         this.dataNascimento = dataNascimento;
     }
 
     public String getIdentificador() {
         return identificador;
+    }
+
+    public String getTelemovel() {
+        return telemovel;
+    }
+
+    public void setTelemovel(String telemovel) {
+        this.telemovel = telemovel;
     }
 
     public void setIdentificador(String identificador) {
@@ -84,6 +94,7 @@ public class Proprietario implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", morada='" + morada + '\'' +
                 ", telefone='" + telefone + '\'' +
+                ", telemovel='" + telemovel + '\'' +
                 ", email='" + email + '\'' +
                 ", dataNascimento='" + dataNascimento + '\'' +
                 '}';
