@@ -1,0 +1,1 @@
+Apartamento;1;2000.0;20.0;Talatona;T3;2;1;false

@@ -5,6 +5,8 @@
 package modelos;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -13,15 +15,16 @@ import java.io.Serializable;
  * @author denez
  */
 public class Proprietario implements Serializable {
-    private String identificador;
+    private int identificador;
     private String nome;
     private String morada;
     private String telefone;
     private String telemovel;
     private String email;
-    private String dataNascimento;
+    private LocalDate dataNascimento;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Proprietario(String identificador, String nome, String morada, String telefone,String telemovel, String email, String dataNascimento) {
+    public Proprietario(int identificador, String nome, String morada, String telefone,String telemovel, String email, LocalDate dataNascimento) {
         this.identificador = identificador;
         this.nome = nome;
         this.morada = morada;
@@ -31,7 +34,7 @@ public class Proprietario implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getIdentificador() {
+    public int getIdentificador() {
         return identificador;
     }
 
@@ -43,7 +46,7 @@ public class Proprietario implements Serializable {
         this.telemovel = telemovel;
     }
 
-    public void setIdentificador(String identificador) {
+    public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
 
@@ -79,14 +82,17 @@ public class Proprietario implements Serializable {
         this.email = email;
     }
 
-    public String getDataNascimento() {
+     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
+    public String getDataNascimentoFormatada() {
+        return dataNascimento.format(FORMATTER);
+    }
     @Override
     public String toString() {
         return "Proprietario{" +
